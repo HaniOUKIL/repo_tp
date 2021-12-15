@@ -1,7 +1,7 @@
 node {
 	def app
 	stage('Clone') {
-		Checkout SCM
+		checkout scm
 	}
 	stage('Build Image') {
 		app = docker.build("webapp.war")
