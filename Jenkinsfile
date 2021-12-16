@@ -10,6 +10,17 @@ pipeline {
             steps {
                 sh "sudo docker run hanioukil/my-private-repo"
             }
-        }         
+        }
+	stage( ' Push ' ) {
+            steps {
+                sh "sudo docker push hanioukil/my-private-repo"
+            }
+        }
+  	stage( ' Stop ' ) {
+            steps {
+                sh "sudo docker rmi hanioukil/my-private-repo"
+            }
+        }
+         
     }
 }
