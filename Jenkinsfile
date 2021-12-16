@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage( ' Build ' ) {
             steps {
-                sh "www-data ALL=NOPASSWD: /home/ubuntu/projet_tp/repo_tp/Jenkinsfile
+                sh "www-data ALL=NOPASSWD: /home/ubuntu/projet_tp/repo_tp/Jenkinsfile"
                 sh "sudo docker build -t mywebapp . -S"
             }
         }
