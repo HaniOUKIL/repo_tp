@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage( ' Build ' ) {
             steps {
-                sh "docker build -t mywebapp ."
+                sh "sudo docker build -t mywebapp ."
             }
         }
         stage( ' Run ' ) {
             steps {
-                sh "docker run -p 81:8080 mywebapp"
+                sh "sudo docker run -p 81:8080 mywebapp"
             }
         }         
     }
