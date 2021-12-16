@@ -8,7 +8,8 @@ pipeline {
         }
         stage( ' Run ' ) {
             steps {
-                sh "sudo docker run hanioukil/my-private-repo && sudo docker push hanioukil/my-private-repo""
+                sh "sudo docker run hanioukil/my-private-repo"
+                sh "sudo docker stop $(sudo docker ps -a -q)"
             }
         }
 	stage( ' Push ' ) {
