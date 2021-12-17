@@ -8,4 +8,4 @@ EXPOSE 8080
 
 CMD [ "catalina.sh" , "run"]
 CMD [ " Sleep(10) "] 
-CMD [ "catalina.sh" , "stop"]
+#CMD [ "catalina.sh" , "stop"]
