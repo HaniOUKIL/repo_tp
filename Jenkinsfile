@@ -1,21 +1,18 @@
 pipeline {
-    agent any
-    stages {
-        stage( ' Build ' ) {
-            steps {
-                sh "sudo docker build -t hanioukil/my-private-repo ."
-            }
+        agent any
+        stages {
+		stage ( ' Clone ') {
+                        steps {
+                                sh "git clone https://github.com/HaniOUKIL/sonar.git"
+                        }
+                }
+
+                stage ( ' Build ') {
+                        steps {
+                                sh "mvn --version"
+                                sh "mvn clean package"
+                        }
+                }
         }
-        stage( ' Run ' ) {
-            steps {
-                sh "sudo docker run hanioukil/my-private-repo "
-            }
-        }
-	stage( ' Push ' ) {
-            steps {
-                sh "sudo docker push hanioukil/my-private-repo"
-            }
-        }
-         
-    }
 }
+
