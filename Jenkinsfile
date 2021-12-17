@@ -1,21 +1,29 @@
-mvn clean verify sonar:sonar \
-  -Dsonar.projectKey=projet_sonarqube \
-  -Dsonar.host.url=http://192.168.1.109:9000 \
-  -Dsonar.login=b6d55d76c96d8b4ef7adffb36ab82740ab09afcb
-
 pipeline {
-        agent any
-        stages {
-                stage ( ' Build ') {
-                        steps {
-                                sh "mvn clean verify sonar:sonar"
-                                sh "-Dsonar.projectKey=projet_sonarqube "
-                                sh " -Dsonar.host.url=http://localhost:9000 "
-			        sh " -Dsonar.login=b6d55d76c96d8b4ef7adffb36ab82740ab09afcb"
-
-                        }
-                }
-
-
+    agent any
+    stages {
+        stage('SCM') {
+            steps {
+                git url: 'https://github.com/HaniOUKIL/repo_tp.git'
+            }
         }
-}
+        stage('build && SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('My SonarQube Server') {
+                    // Optionally use a Maven environment you've configured already
+                    withMaven(maven:'Maven 3.5') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                }
+            }
+        }
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+    }
+}i
