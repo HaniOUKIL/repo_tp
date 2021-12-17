@@ -1,12 +1,6 @@
 pipeline {
         agent any
         stages {
-		stage ( ' Clone ') {
-                        steps {
-                                sh "git clone https://github.com/HaniOUKIL/repo_tp.git"
-                        }
-                }
-
                 stage ( ' Build ') {
                         steps {
                                 sh "mvn --version"
