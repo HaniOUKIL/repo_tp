@@ -3,7 +3,7 @@ pipeline {
         stages {
 		stage ( ' Clone ') {
                         steps {
-                                sh "git clone https://github.com/HaniOUKIL/sonar.git"
+                                sh "git clone https://github.com/HaniOUKIL/repo_tp.git"
                         }
                 }
 
