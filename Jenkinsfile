@@ -6,11 +6,11 @@ pipeline {
                 SONARQUBE_LOGIN =  "b6d55d76c96d8b4ef7adffb36ab82740ab09afcb"
     }
     stages {
-        stage('Code Quality Analysis') {
+        stage('Sonarqube') {
             steps {
-                git url: 'mvn clean verify sonar:sonar -Dsonar.projectKey=projet_sonarqube \
- 						       -Dsonar.host.url=SONARQUBE_URL:SONARQUBE_PORT \
-						       -Dsonar.login=SONARQUBE_LOGIN '
+		WithSoanQubeEnv (Sonarqube) {
+                sh 'mvn clean package sonar:sonar  -Dsonar.login=SONARQUBE_LOGIN '
+		}
             }
         }
     }
