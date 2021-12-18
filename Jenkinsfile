@@ -1,28 +1,16 @@
 pipeline {
     agent any
+    envirenment { 
+		SONARQUBE_URL = "http://c1a9-88-127-215-92.ngrok.io"
+                SONARQUBE_PORT =  "9000"
+                SONARQUBE_LOGIN =  "b6d55d76c96d8b4ef7adffb36ab82740ab09afcb"
+    }
     stages {
-        stage('SCM') {
+        stage('Code Quality Analysis') {
             steps {
-                git url: 'https://github.com/HaniOUKIL/repo_tp.git'
-            }
-        }
-        stage('build && SonarQube analysis') {
-            steps {
-                withSonarQubeEnv('My SonarQube Server') {
-                    // Optionally use a Maven environment you've configured already
-                    withMaven(maven:'Maven 3.5') {
-                        sh 'mvn clean package sonar:sonar'
-                    }
-                }
-            }
-        }
-        stage("Quality Gate") {
-            steps {
-                timeout(time: 1, unit: 'HOURS') {
-                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-                    // true = set pipeline to UNSTABLE, false = don't
-                    waitForQualityGate abortPipeline: true
-                }
+                git url: 'mvn clean verify sonar:sonar -Dsonar.projectKey=projet_sonarqube \
+ 						       -Dsonar.host.url=SONARQUBE_URL:SONARQUBE_PORT \
+						       -Dsonar.login=SONARQUBE_LOGIN '
             }
         }
     }
