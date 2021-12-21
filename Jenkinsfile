@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Sonarqube') {
             steps {
-		WithSoanQubeEnv (Sonarqube) {
+		WithSoanQubeEnv (sonarqube) {
                 sh 'mvn clean package sonar:sonar  -Dsonar.login=$SONARQUBE_LOGIN '
 		}
             }
