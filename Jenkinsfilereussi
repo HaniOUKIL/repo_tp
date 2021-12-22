@@ -8,9 +8,10 @@ pipeline {
     stages {
         stage('Sonarqube') {
             steps {
-		WithSoanQubeEnv (sonarqube) {
-                sh 'mvn clean package sonar:sonar  -Dsonar.login=$SONARQUBE_LOGIN '
-		}
+                sh "mvn clean verify sonar:sonar \
+  		-Dsonar.projectKey=projet_sonarqube \
+  		-Dsonar.host.url=http://192.168.1.85:9000 \
+  		-Dsonar.login=2f2201ce672db686f45ae0fd0c39932ff709534f"
             }
         }
     }
