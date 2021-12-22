@@ -10,7 +10,7 @@ pipeline {
             steps {
                 mvn clean vérifier sonar:sonar \
   		-Dsonar.projectKey=projet_sonarqube \
-  		-Dsonar.host.url=http://192.168.1.85:9000 \
+  		-Dsonar.host.url=http://f27e-89-87-104-206.ngrok.io \
   		-Dsonar.login=2f2201ce672db686f45ae0fd0c39932ff709534f
             }
         }
