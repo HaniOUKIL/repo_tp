@@ -8,10 +8,10 @@ pipeline {
     stages {
         stage('Sonarqube') {
             steps {
-                mvn clean verify sonar:sonar \
+                sh "mvn clean verify sonar:sonar \
   		-Dsonar.projectKey=projet_sonarqube \
   		-Dsonar.host.url=http://f27e-89-87-104-206.ngrok.io \
-  		-Dsonar.login=2f2201ce672db686f45ae0fd0c39932ff709534f
+  		-Dsonar.login=2f2201ce672db686f45ae0fd0c39932ff709534f"
             }
         }
     }
